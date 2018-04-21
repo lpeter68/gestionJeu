@@ -1,9 +1,10 @@
 @extends('template')
 
 @section('contenu')
-    <form action="{{ url('jeu') }}" method="POST">
+    <form action="{{ url('jeu') }}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
-        <input type="text" name="nom" id="nom">
+        <input type="text" class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" name="nom" id="nom">
+        {!! $errors->first('nom', '<div class="invalid-feedback">:message</div>') !!}
         <input type="text" name="edition" id="edition">
         <input type="number" name="date_edition" id="date_edition">
         <input type="text" name="remarque" id="remarque">
@@ -30,7 +31,8 @@
         <input type="text" name="mise_en_place" id="mise_en_place">
         <input type="text" name="pieces_manquantes" id="pieces_manquantes">
         <input type="text" name="divers" id="divers">
-        <input type="file" name="photo" id="photo">
+        <input type="file" class="form-control {{ $errors->has('photo') ? 'is-invalid' : '' }}" name="photo" id="photo">
+        {!! $errors->first('photo', '<div class="invalid-feedback">:message</div>') !!}
         <input type="submit" value="Envoyer !">
     </form>
 @endsection

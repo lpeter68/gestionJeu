@@ -17,9 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/jeu', 'JeuController@create');
-Route::post('/jeu', 'JeuController@store');
-Route::get('/listeJeu', 'JeuController@index');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/jeu', 'JeuController@create');
+    Route::post('/jeu', 'JeuController@store');
+    Route::get('/listeJeu', 'JeuController@index');
+    Route::get('/jeu/{id}', 'JeuController@edit')->where('id', '[0-9]+');
+    Route::get('/supprimerJeu/{id}', 'JeuController@destroy')->where('id', '[0-9]+'); //TODO must be a patch
+});
 
 

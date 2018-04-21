@@ -100,6 +100,8 @@ return [
     |
     */
 
+    'alpha_num_spaces'         => 'The :attribute may only contain letters, numbers and spaces.',
+
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',

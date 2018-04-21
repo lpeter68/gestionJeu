@@ -98,6 +98,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
+    'alpha_num_spaces'         => 'Le champ :attribute doit contenir uniquement des lettres, des chiffres et des espaces.',
 
     'custom' => [
         'attribute-name' => [

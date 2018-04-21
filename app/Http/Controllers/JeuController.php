@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Jeu;
+use App\http\Requests\JeuRequest;
 
 class JeuController extends Controller
 {
@@ -33,8 +33,12 @@ class JeuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(JeuRequest $request)
     {
+        //TODO utiliser une facade
+        $photoName = $request->nom.'_'.time().'.jpg';
+        $request->photo->storeAs(config('images.path'),$photoName,'public');
+        $request->photo = $photoName; //TODO store fileName in db
         Jeu::create ($request->all ());
         return "ok";
     }
@@ -47,6 +51,7 @@ class JeuController extends Controller
      */
     public function show($id)
     {
+        return Jeu::Find($id);
     }
 
     /**
@@ -57,7 +62,7 @@ class JeuController extends Controller
      */
     public function edit($id)
     {
-        //
+        return Jeu::Find($id);
     }
 
     /**
@@ -80,6 +85,7 @@ class JeuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Jeu::Find($id)->delete();
+        return "jeu supprimé";
     }
 }
