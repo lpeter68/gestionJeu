@@ -31,8 +31,29 @@
         <input type="text" name="mise_en_place" id="mise_en_place">
         <input type="text" name="pieces_manquantes" id="pieces_manquantes">
         <input type="text" name="divers" id="divers">
-        <input type="file" class="form-control {{ $errors->has('photo') ? 'is-invalid' : '' }}" name="photo" id="photo">
-        {!! $errors->first('photo', '<div class="invalid-feedback">:message</div>') !!}
+        <div class="image-upload">
+            <label for="photo">
+                <img src="uploads/test 11.jpg" id="imgPhoto"/>
+            </label>
+            <input type="file" class="form-control {{ $errors->has('photo') ? 'is-invalid' : '' }}" name="photo" id="photo" style="display: none">
+            {!! $errors->first('photo', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
         <input type="submit" value="Envoyer !">
     </form>
+
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#imgPhoto').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#photo").change(function() {
+            readURL(this);
+        });
+    </script>
 @endsection

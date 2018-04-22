@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Jeu;
 use App\http\Requests\JeuRequest;
+use App\Facade\PhotoManagement;
+
 
 class JeuController extends Controller
 {
@@ -31,15 +33,18 @@ class JeuController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Facade\PhotoManagement
      * @return \Illuminate\Http\Response
      */
-    public function store(JeuRequest $request)
+    public function store(JeuRequest $request, PhotoManagement $photoManagement)
     {
-        //TODO utiliser une facade
-        $photoName = $request->nom.'_'.time().'.jpg';
-        $request->photo->storeAs(config('images.path'),$photoName,'public');
-        $request->photo = $photoName; //TODO store fileName in db
-        Jeu::create ($request->all ());
+        $requestData = $request->all();
+
+        if($request->photo != null) {
+            $requestData['photo'] = $photoManagement->save($request->photo, $request->nom);
+        }
+
+        Jeu::create ($requestData);
         return "ok";
     }
 
