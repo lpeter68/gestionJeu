@@ -11,6 +11,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $labelInteret = ['Nul','Moyen','Bien','Très-bien','Excellent'];
+        foreach ($labelInteret as $label){
+            $this->insertRessourceTable("interet", $label);
+        }
+
+        $labelEtat = ['Passable','Bien','Neuf'];
+        foreach ($labelEtat as $label){
+            $this-> insertRessourceTable('etat', $label);
+        }
+
+        $labelRegle = ['Facile','Moyenne','Longue'];
+        foreach ($labelRegle as $label){
+            $this->insertRessourceTable('regle', $label);
+        }
+    }
+
+    public static function insertRessourceTable($table, $valeur)
+    {
+        DB::table($table)->insert([
+            'label' => $valeur,
+        ]);
     }
 }
