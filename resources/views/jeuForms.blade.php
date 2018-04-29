@@ -145,19 +145,19 @@
 
         <div class="col-sm-5">
         <label for="interet">@lang('contents.interet')</label>
-        <input type="text" name="interet" id="interet">
+        <select name="interet" id="interet"></select>
         {!! $errors->first('interet', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
         <div class="col-sm-5">
         <label for="etat">@lang('contents.etat')</label>
-        <input type="text" name="etat" id="etat">
+        <select name="etat" id="etat" ></select>
         {!! $errors->first('etat', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
         <div class="col-sm-5">
         <label for="regle">@lang('contents.regle')</label>
-        <input type="text" name="regle" id="regle">
+        <select name="regle" id="regle"></select>
         {!! $errors->first('regle', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
@@ -217,6 +217,32 @@
             }
             })
         });
+
+        remplirMenuDeroulant('{{route('getInteretLabel')}}','#interet');
+        remplirMenuDeroulant('{{route('getEtatLabel')}}','#etat');
+        remplirMenuDeroulant('{{route('getRegleLabel')}}','#regle');
+
+        function remplirMenuDeroulant(route, jqueryID) {
+            var jqxhr = $.ajax({
+                type: 'get',    // on n'a pas de paramètres à envoyer alors GET est sécuritaire
+                url: route,
+                dataType: "html",    // le fichier php fait un echo de code HTML
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                data: ""
+
+            })
+            .done(function (response, textStatus, jqXHR) {
+                var response= JSON.parse(response)
+                var optionList ;
+                for (var i=0;i<response.length;i++) {
+                    optionList += "<option value="+response[i].id+">"+response[i].label+ "</option>";
+                }
+                $(jqueryID).html(optionList);
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                $(jqueryID).html("<option value=''>Impossible de joindre le serveur</option>");
+            });
+        }
     </script>
     <style>
         .image{

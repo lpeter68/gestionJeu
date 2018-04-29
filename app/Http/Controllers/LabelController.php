@@ -8,10 +8,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Interet;
-use App\Model\Etat;
 use App\Model\Label;
-use App\Model\Regle;
+
+use Illuminate\Support\Facades\DB;
 
 class LabelController
 {
@@ -22,7 +21,9 @@ class LabelController
      */
     public function getAllInteret()
     {
-        return Interet::all();
+        return DB::table('interet')
+            ->orderBy('id', 'asc')
+            ->get();
     }
 
     /**
@@ -32,7 +33,9 @@ class LabelController
      */
     public function getAllRegle()
     {
-        return Regle::all();
+        return DB::table('regle')
+            ->orderBy('id', 'asc')
+            ->get();
     }
 
     /**
@@ -42,7 +45,10 @@ class LabelController
      */
     public function getAllEtat()
     {
-        return Etat::all();
+        return DB::table('etat')
+            ->orderBy('id', 'asc')
+            ->get();
+
     }
 
 }

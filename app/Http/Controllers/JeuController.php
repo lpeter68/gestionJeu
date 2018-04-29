@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Jeu;
+use App\Model\Jeu;
 use App\http\Requests\JeuRequest;
 use App\Facade\PhotoManagement;
 
@@ -45,7 +45,6 @@ class JeuController extends Controller
         }
 
         Jeu::create ($requestData);
-        return "ok";
     }
 
     /**

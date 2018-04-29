@@ -24,9 +24,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/listeJeu', 'JeuController@index');
     Route::get('/jeu/{id}', 'JeuController@edit')->where('id', '[0-9]+');
     Route::get('/supprimerJeu/{id}', 'JeuController@destroy')->where('id', '[0-9]+'); //TODO must be a patch
-    Route::get('/label/interet', 'LabelController@getAllInteret');
-    Route::get('/label/regle', 'LabelController@getAllRegle');
-    Route::get('/label/etat', 'LabelController@getAllEtat');
+    Route::get('/label/interet', 'LabelController@getAllInteret')->name('getInteretLabel');
+    Route::get('/label/regle', 'LabelController@getAllRegle')->name('getRegleLabel');
+    Route::get('/label/etat', 'LabelController@getAllEtat')->name('getEtatLabel');
 });
 
 
