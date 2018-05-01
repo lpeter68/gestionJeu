@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Model\Jeu;
 use App\http\Requests\JeuRequest;
 use App\Facade\PhotoManagement;
+use \Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 
 class JeuController extends Controller
@@ -45,6 +48,7 @@ class JeuController extends Controller
         }
 
         Jeu::create ($requestData);
+        return view('jeuForms');
     }
 
     /**
@@ -91,5 +95,42 @@ class JeuController extends Controller
     {
         Jeu::Find($id)->delete();
         return "jeu supprimé";
+    }
+
+    /**
+     * Find the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function search()
+    {
+        return view('rechercheJeu');
+    }
+
+    public function find(Request $request)
+    {
+        //TODO externalisé + prendre en compte recherche avancée
+        $sql = DB::table('jeux');
+
+        if($request->nom != null && $request->nom != "") {
+            $sql->where('nom', 'like', ('%' . $request->nom . '%'));
+        }
+        if($request->nombre_joueur != null && $request->nombre_joueur!="") {
+            $sql->where('nombre_joueur_min', '<=', $request->nombre_joueur)
+                ->where('nombre_joueur_max', '>=', $request->nombre_joueur);
+        }
+        if($request->temps_jeu != null && $request->temps_jeu!="") {
+            //TODO prendre en compte le temps de mise en place
+            $sql->where('temps_jeu', '<=', $request->temps_jeu);
+        }
+        if($request->regle != null && $request->regle!="") {
+            $sql->where('regle', '<=', $request->regle);
+        }
+        if($request->interet != null && $request->interet!="") {
+            $sql->where('interet', '>=', $request->interet);
+        }
+        return $sql->orderBy('id', 'asc')
+            ->get();
     }
 }

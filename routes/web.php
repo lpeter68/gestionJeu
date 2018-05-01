@@ -19,10 +19,12 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/jeu', 'JeuController@create');
-    Route::post('/jeu', 'JeuController@store');
-    Route::get('/listeJeu', 'JeuController@index');
-    Route::get('/jeu/{id}', 'JeuController@edit')->where('id', '[0-9]+');
+    Route::get('/jeu', 'JeuController@create')->name('createJeu');
+    Route::post('/jeu', 'JeuController@store')->name('storeJeu');
+    Route::get('/recherche', 'JeuController@search')->name('pageRecherche');
+    Route::post('/recherche', 'JeuController@find')->name('rechercheJeu');
+    Route::get('/listeJeu', 'JeuController@index')->name('getAllJeu');
+    Route::get('/jeu/{id}', 'JeuController@edit')->where('id', '[0-9]+')->name('getJeu');
     Route::get('/supprimerJeu/{id}', 'JeuController@destroy')->where('id', '[0-9]+'); //TODO must be a patch
     Route::get('/label/interet', 'LabelController@getAllInteret')->name('getInteretLabel');
     Route::get('/label/regle', 'LabelController@getAllRegle')->name('getRegleLabel');

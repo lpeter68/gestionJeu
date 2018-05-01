@@ -12,9 +12,11 @@ return [
     'date_edition' => 'Année d\'édition',
     'remarque' => 'Remarque',
     'nombre_joueur_min' => 'Nombre de joueur minimum',
+    'nombre_joueur' => 'Nombre de joueur',
     'nombre_joueur_max' => 'Nombre de joueur maximum',
     'age' => 'Age minimum conseillé',
     'temps_jeu' => 'Temps de jeu moyen en minutes',
+    'temps_jeu_et_mise_en_place' => 'Temps de jeu (incluant la mise en place)',
     'hasard' => 'Hasard',
     'strategie' => 'Strategie',
     'des' => 'Des',
@@ -33,5 +35,6 @@ return [
     'regle' => 'Difficultée de la règle',
     'mise_en_place' => ' Temps de mise en place en minutes',
     'pieces_manquantes' => 'Pièces manquantes',
-    'divers' => 'Divers',
-];
+    'contient_des_pieces_manquantes' => 'Jeux avec des pièces manquantes',
+    'recherche_Avancee' => 'Recherche avancée',
+    ];

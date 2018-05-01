@@ -1,7 +1,9 @@
 @extends('template')
 
 @section('contenu')
-    <form action="{{ url('jeu') }}" method="POST" enctype="multipart/form-data">
+    <script type="text/javascript" src="{{ URL::asset('js/remplirmenuDeroulant.js') }}"></script>
+
+    <form action="{{ route('storeJeu') }}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="col-sm-5 show-border" id="divPhoto" style="overflow: hidden">
             <div class="image">
@@ -222,27 +224,6 @@
         remplirMenuDeroulant('{{route('getEtatLabel')}}','#etat');
         remplirMenuDeroulant('{{route('getRegleLabel')}}','#regle');
 
-        function remplirMenuDeroulant(route, jqueryID) {
-            var jqxhr = $.ajax({
-                type: 'get',    // on n'a pas de paramètres à envoyer alors GET est sécuritaire
-                url: route,
-                dataType: "html",    // le fichier php fait un echo de code HTML
-                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                data: ""
-
-            })
-            .done(function (response, textStatus, jqXHR) {
-                var response= JSON.parse(response)
-                var optionList ;
-                for (var i=0;i<response.length;i++) {
-                    optionList += "<option value="+response[i].id+">"+response[i].label+ "</option>";
-                }
-                $(jqueryID).html(optionList);
-            })
-            .fail(function (jqXHR, textStatus, errorThrown) {
-                $(jqueryID).html("<option value=''>Impossible de joindre le serveur</option>");
-            });
-        }
     </script>
     <style>
         .image{
