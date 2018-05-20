@@ -8,7 +8,8 @@
         <div class="col-sm-5 show-border" id="divPhoto" style="overflow: hidden">
             <div class="image">
             <label for="photo" class="align-middle">
-                    <img src="uploads/test 11.jpg" id="imgPhoto" class="img" />
+                <img src={{ asset('uploads/test.jpg') }} id="imgPhoto" class="img" />
+                    <!--img src="uploads/test 11.jpg" id="imgPhoto" class="img" />
                 <!--img src="uploads/test 11.jpg" id="imgPhoto" style=" height: 300px"/-->
             </label>
             <input type="file" class="form-control {{ $errors->has('photo') ? 'is-invalid' : '' }}" name="photo" id="photo" style="display: none">

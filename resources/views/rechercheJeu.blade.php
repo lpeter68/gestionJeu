@@ -166,7 +166,6 @@
         remplirMenuDeroulant('{{route('getRegleLabel')}}','#regle');
 
         $("#bouttonRechercheAvancee").click(function() {
-            alert('Ne fonctionne pas encore') //TODO
             if(document.getElementById("rechercheAvancee").style.display === 'none'){
                 document.getElementById("rechercheAvancee").style.display = 'block';
             }else{
