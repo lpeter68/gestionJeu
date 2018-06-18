@@ -37,4 +37,5 @@ return [
     'pieces_manquantes' => 'Pièces manquantes',
     'contient_des_pieces_manquantes' => 'Jeux avec des pièces manquantes',
     'recherche_Avancee' => 'Recherche avancée',
-    ];
+    'divers' => 'Remarque diverse',
+];

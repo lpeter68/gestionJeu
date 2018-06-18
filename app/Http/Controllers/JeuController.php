@@ -120,6 +120,12 @@ class JeuController extends Controller
         return view('rechercheJeu');
     }
 
+    /**Find games who match with the research
+ *
+ * @param Request $request
+ * @param JeuManagement $jeuManagement
+ * @return \Illuminate\Support\Collection
+ */
     public function find(Request $request, JeuManagement $jeuManagement)
     {
         return $jeuManagement->rechercheMultiCritère($request);
