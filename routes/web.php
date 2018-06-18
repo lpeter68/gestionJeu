@@ -30,6 +30,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/label/interet', 'LabelController@getAllInteret')->name('getInteretLabel');
     Route::get('/label/regle', 'LabelController@getAllRegle')->name('getRegleLabel');
     Route::get('/label/etat', 'LabelController@getAllEtat')->name('getEtatLabel');
+    Route::get('/autocomplete/nom', 'AutocompleteController@autocompletebyNom')->name('autocompleteNomJeu');
+    Route::get('/autocomplete/editeur', 'AutocompleteController@autocompletebyEditeur')->name('autocompleteEditeur');
+
 });
 
 

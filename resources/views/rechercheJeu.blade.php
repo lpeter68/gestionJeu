@@ -2,8 +2,9 @@
 
 @section('contenu')
     <script type="text/javascript" src="{{ URL::asset('js/remplirmenuDeroulant.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/autocomplete.js') }}"></script>
 
-    <form action="{{ route('rechercheJeu') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('rechercheJeu') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
     {{ csrf_field() }}
         <div class=" row col-sm-5">
             <label for="nom">@lang('contents.nom')</label>
@@ -161,9 +162,13 @@
     </form>
 
     <script>
-        remplirMenuDeroulant('{{route('getInteretLabel')}}','#interet');
-        remplirMenuDeroulant('{{route('getEtatLabel')}}','#etat');
-        remplirMenuDeroulant('{{route('getRegleLabel')}}','#regle');
+        remplirMenuDeroulant('#interet', '{{route('getInteretLabel')}}');
+        remplirMenuDeroulant('#etat', '{{route('getEtatLabel')}}');
+        remplirMenuDeroulant('#regle', '{{route('getRegleLabel')}}');
+        addAutocomplete( '#nom', '{{route('autocompleteNomJeu')}}');
+        addAutocomplete('#edition', '{{route('autocompleteEditeur')}}');
+        //removeBrowserAutocomplete('#')
+
 
         $("#bouttonRechercheAvancee").click(function() {
             if(document.getElementById("rechercheAvancee").style.display === 'none'){
@@ -172,6 +177,7 @@
                 document.getElementById("rechercheAvancee").style.display = 'none';
             }
         });
+
     </script>
 
 @endsection

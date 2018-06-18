@@ -2,8 +2,9 @@
 
 @section('contenu')
     <script type="text/javascript" src="{{ URL::asset('js/remplirmenuDeroulant.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/autocomplete.js') }}"></script>
 
-    <form action="{{ route('storeJeu') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('storeJeu') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
         {{ csrf_field() }}
         <div class="col-sm-5 show-border" id="divPhoto" style="overflow: hidden">
             <div class="image">
@@ -221,9 +222,11 @@
             })
         });
 
-        remplirMenuDeroulant('{{route('getInteretLabel')}}','#interet');
-        remplirMenuDeroulant('{{route('getEtatLabel')}}','#etat');
-        remplirMenuDeroulant('{{route('getRegleLabel')}}','#regle');
+        remplirMenuDeroulant('#interet','{{route('getInteretLabel')}}');
+        remplirMenuDeroulant('#etat','{{route('getEtatLabel')}}');
+        remplirMenuDeroulant('#regle', '{{route('getRegleLabel')}}');
+        addAutocomplete( '#nom', '{{route('autocompleteNomJeu')}}');
+        addAutocomplete('#edition', '{{route('autocompleteEditeur')}}');
 
     </script>
     <style>

@@ -1,4 +1,4 @@
-function remplirMenuDeroulant(route, jqueryID) {
+function remplirMenuDeroulant(jquerySelector, route) {
     var jqxhr = $.ajax({
         type: 'get',    // on n'a pas de paramètres à envoyer alors GET est sécuritaire
         url: route,
@@ -13,9 +13,9 @@ function remplirMenuDeroulant(route, jqueryID) {
             for (var i=0;i<response.length;i++) {
                 optionList += "<option value="+response[i].id+">"+response[i].label+ "</option>";
             }
-            $(jqueryID).html(optionList);
+            $(jquerySelector).html(optionList);
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-            $(jqueryID).html("<option value=''>Impossible de joindre le serveur</option>");
+            $(jquerySelector).html("<option value=''>Impossible de joindre le serveur</option>");
         });
 }
