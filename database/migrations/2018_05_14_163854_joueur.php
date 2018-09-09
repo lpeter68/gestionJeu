@@ -16,9 +16,9 @@ class Joueur extends Migration
         Schema::create('joueurs', function(Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('nom')->unique();
+            $table->string('nom')->nullable();
             $table->string('prenom')->nullable();
-            $table->integer('surnom')->nullable();
+            $table->string('surnom')->unique();
             $table->unsignedInteger('applicationUser')->nullable();;
             $table->foreign('applicationUser')->references('id')->on('users');
         });

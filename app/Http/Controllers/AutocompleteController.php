@@ -28,11 +28,13 @@ class AutocompleteController
             ->where($col, 'like', '%'.$term.'%')
             ->take(6)->get();
 
+        $results = array();
+
         foreach ($queries as $query)
         {
             $results[] = ['id' => $query->id, 'value' => $query->$col]; //you can take custom values as you want
         }
-        return response()->json($results);
+        return $results;
     }
 
     /** Autocomplete with nom from table jeux
@@ -40,7 +42,7 @@ class AutocompleteController
      * @param Request $request
      */
     public function autocompletebyNom(Request $request){
-        return AutocompleteController::autocompleteGeneral($request,'jeux','nom');
+        return response()->json(AutocompleteController::autocompleteGeneral($request,'jeux','nom'));
     }
 
     /** Autocomplete with editeur from table jeux
@@ -48,6 +50,31 @@ class AutocompleteController
      * @param Request $request
      */
     public function autocompletebyEditeur(Request $request){
-        return AutocompleteController::autocompleteGeneral($request,'jeux','edition');
+        return response()->json(AutocompleteController::autocompleteGeneral($request,'jeux','edition'));
+    }
+
+    /** Autocomplete with joueur from table jeux
+     *
+     * @param Request $request
+     */
+    public function autocompletebyJoueur(Request $request){
+        $resultSurnom = AutocompleteController::autocompleteGeneral($request,'joueurs','surnom');
+        $resultPrenom = AutocompleteController::autocompleteGeneral($request,'joueurs','prenom');
+        $resultNom = AutocompleteController::autocompleteGeneral($request,'joueurs','nom');
+        return response()->json(AutocompleteController::mergeAutocomplet($resultSurnom,$resultPrenom));
+    }
+
+    public function mergeAutocomplet($array1, $array2){
+    //TODO trouver l'erreur.
+       foreach ($array2 as $row2){
+           $exist = false;
+           foreach ($array1 as $row1) {
+               if (($row1[id]) . contains($row2[id])) {
+                   $exist = true;
+               }
+           }
+           if(!$exist) $array1.add($row2);
+       }
+       return $array1;
     }
 }

@@ -38,4 +38,8 @@ return [
     'contient_des_pieces_manquantes' => 'Jeux avec des pièces manquantes',
     'recherche_Avancee' => 'Recherche avancée',
     'divers' => 'Remarque diverse',
+    'nom_joueur' => 'Nom du joueur',
+    'score' => 'Score',
+    'equipe' => 'Equipe',
+    'joueurs' => 'joueurs',
 ];
