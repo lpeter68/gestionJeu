@@ -8,8 +8,9 @@
 
 namespace App\Model;
 
+use Illuminate\Database\Eloquent\Model;
 
-class Partie
+class Partie extends Model
 {
     protected $table = 'parties';
 
