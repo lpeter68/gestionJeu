@@ -71,7 +71,12 @@ class JeuController extends Controller
      */
     public function getImagePath($id, PhotoManagement $photoManagement)
     {
-        return $photoManagement->load(Jeu::Find($id)->photo);
+        $jeu = Jeu::Find($id);
+        if($jeu->photo != null) {
+            return $photoManagement->load(Jeu::Find($id)->photo);
+        }else{
+            return "";
+        }
     }
 
     /**
@@ -128,6 +133,8 @@ class JeuController extends Controller
  */
     public function find(Request $request, JeuManagement $jeuManagement)
     {
-        return $jeuManagement->rechercheMultiCritère($request);
+        $jeu = $jeuManagement->rechercheMultiCritère($request);
+        //dd($jeu);
+        return view('resultatRechercheJeu')->with('jeux', $jeu);;
     }
 }

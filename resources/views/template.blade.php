@@ -22,6 +22,9 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
+<link rel="stylesheet" href="{{ asset('css/site.css') }}
+        ">
+
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Accueil</a>
@@ -38,8 +41,6 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('createPartie') }}">@lang('menu.creerPartie')</a>
                     <a class="dropdown-item" href="{{ route('getAllPartie') }}">@lang('menu.toutesLesParties')</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ route('pageRecherche') }}">@lang('menu.recherche')</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -60,9 +61,11 @@
         </form>
     </div>
 </nav>
+<div class="offset-sm-1">
+    @yield('contenu')
+</div>
 <script>
     $('.dropdown-toggle').dropdown()
 </script>
-@yield('contenu')
 </body>
 </html>

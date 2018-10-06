@@ -42,4 +42,5 @@ return [
     'score' => 'Score',
     'equipe' => 'Equipe',
     'joueurs' => 'joueurs',
+    'datePartie' => 'Partie jouée le:',
 ];
