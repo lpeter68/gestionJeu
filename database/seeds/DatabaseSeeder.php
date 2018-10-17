@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
         foreach ($labelRegle as $label){
             $this->insertRessourceTable('regle', $label);
         }
+
+        $this->call(RoleTableSeeder::class);
     }
 
     public static function insertRessourceTable($table, $valeur)

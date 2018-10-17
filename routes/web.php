@@ -44,6 +44,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/autocomplete/editeur', 'AutocompleteController@autocompletebyEditeur')->name('autocompleteEditeur');
     Route::get('/autocomplete/joueur', 'AutocompleteController@autocompletebyJoueur')->name('autocompleteJoueur');
 
+    Route::get('/roles', 'HomeController@roles')->name('roles');
+
+    Route::get('/forbidden', 'ErrorController@forbidden')->name('forbidden');
+
+    Route::group(['middleware' => 'admin'], function () {
+
+    });
 });
 
 
