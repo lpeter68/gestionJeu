@@ -35,8 +35,8 @@ class PartieController extends Controller
      */
     public function store(Request $request)
     {
-        /*var_dump($request);
-        die;*/
+        //TODO traiter la requete pour tout avoir
+        dd($request);
         Partie::create ($request);
         return view('partieForms');
     }

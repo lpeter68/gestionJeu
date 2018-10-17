@@ -18,10 +18,14 @@ class AutocompleteController
      * @param Request $request
      * @param String $table the table containing data
      * @param String $col the column with data
+     * @param String $colVal the column for valuewith data
      * @return \Illuminate\Http\JsonResponse
      */
-    public function autocompleteGeneral(Request $request, String $table, String $col)
+    public function autocompleteGeneral(Request $request, String $table, String $col, String $colVal = null)
     {
+        if($colVal==null){
+            $colVal=$col;
+        }
         $term = $request->term;
 
         $queries = DB::table($table)
@@ -32,7 +36,7 @@ class AutocompleteController
 
         foreach ($queries as $query)
         {
-            $results[] = ['id' => $query->id, 'value' => $query->$col]; //you can take custom values as you want
+            $results[] = ['id' => $query->id, 'value' => $query->$colVal]; //you can take custom values as you want
         }
         return $results;
     }
@@ -59,21 +63,20 @@ class AutocompleteController
      */
     public function autocompletebyJoueur(Request $request){
         $resultSurnom = AutocompleteController::autocompleteGeneral($request,'joueurs','surnom');
-        $resultPrenom = AutocompleteController::autocompleteGeneral($request,'joueurs','prenom');
-        $resultNom = AutocompleteController::autocompleteGeneral($request,'joueurs','nom');
-        return response()->json(AutocompleteController::mergeAutocomplet($resultSurnom,$resultPrenom));
+        $resultPrenom = AutocompleteController::autocompleteGeneral($request,'joueurs','prenom','surnom');
+        $resultNom = AutocompleteController::autocompleteGeneral($request,'joueurs','nom','surnom');
+        return response()->json(AutocompleteController::mergeAutocomplet(AutocompleteController::mergeAutocomplet($resultSurnom,$resultPrenom),$resultNom));
     }
 
     public function mergeAutocomplet($array1, $array2){
-    //TODO trouver l'erreur.
        foreach ($array2 as $row2){
            $exist = false;
            foreach ($array1 as $row1) {
-               if (($row1[id]) . contains($row2[id])) {
+               if ($row1["id"] == $row2["id"]) {
                    $exist = true;
                }
            }
-           if(!$exist) $array1.add($row2);
+           if(!$exist) array_push($array1,$row2);
        }
        return $array1;
     }

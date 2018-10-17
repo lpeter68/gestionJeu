@@ -3,9 +3,6 @@
 @section('contenu')
     <script type="text/javascript" src="{{ URL::asset('js/autocomplete.js') }}"></script>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-
     <form action="{{ route('storePartie') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
         {{ csrf_field() }}
 
@@ -17,7 +14,7 @@
 
         <div class=" row col-sm-5">
             <label for="date">@lang('contents.datePartie')</label>
-            <input type="date" class="col-sm-11 form-control {{ $errors->has('date') ? 'is-invalid' : '' }}" name="date" id="date">
+            <input type="date" class="col-sm-11 form-control {{ $errors->has('date') ? 'is-invalid' : '' }}" name="date" id="date" value="{{date('Y-m-d')}}">
             {!! $errors->first('date', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
@@ -37,8 +34,10 @@
         </div>
         <a id="addEquipeButton" onclick="addEquipe()"><i class="fa fa-plus-circle" style="font-size:36px;color:     #007bff"></i></a>
 
+        <input type="hidden" id="Equipe" name="Equipe">
+
         <div class="col-sm-5">
-            <input type="submit" value="Envoyer !">
+            <input type="submit" id="submit" value="Envoyer !">
         </div>
     </form>
 
@@ -47,16 +46,16 @@
         var idEquipe=1;
         addEquipe();
         addAutocomplete( '#jeu', '{{route('autocompleteNomJeu')}}');
-        $('#date').datepicker({
-            uiLibrary: 'bootstrap4',
-            format: 'mm-dd-yyyy'
-        });
+
+        console.log(Date.now())
+        $('#date').valueAsDate = new Date();
 
         function addJoueur(a) {
             if(n.length>=a){
                 n.push(1);
             }
-            $("#content_"+a).append('<input type="text" class="form-control col-10 mb-3" >');
+            $("#content_"+a).append('<input type="text" id="inputJoueur_'+n[a]+'" class="form-control col-10 mb-3" name="joueur">');
+            addAutocomplete("#inputJoueur_"+n[a], '{{route('autocompleteJoueur')}}');
             n[a]++;
         }
 
@@ -85,5 +84,9 @@
                 $(".cardEquipe").show();
             }
         });
+
+        $('#submit').click(function(){
+            $('#Equipe').val('test')
+        })
     </script>
 @endsection
