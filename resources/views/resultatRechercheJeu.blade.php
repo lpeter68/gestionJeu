@@ -27,7 +27,7 @@
             var i = 0;
 
             var image = '#image_'+id;
-            var jqxhr = $.ajax({
+            $.ajax({
                 type: 'get',
                 url: route,
                 dataType: "html",

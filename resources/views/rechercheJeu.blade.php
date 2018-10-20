@@ -169,8 +169,6 @@
         remplirMenuDeroulant('#regle', '{{route('getRegleLabel')}}');
         addAutocomplete( '#nom', '{{route('autocompleteNomJeu')}}');
         addAutocomplete('#edition', '{{route('autocompleteEditeur')}}');
-        //removeBrowserAutocomplete('#')
-
 
         $("#bouttonRechercheAvancee").click(function() {
             if(document.getElementById("rechercheAvancee").style.display === 'none'){

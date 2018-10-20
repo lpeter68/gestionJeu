@@ -7,9 +7,9 @@
  */
 
 namespace App\Model;
+use Illuminate\Database\Eloquent\Model;
 
-
-class Joueur
+class Joueur extends  Model
 {
     protected $table = 'joueurs';
 

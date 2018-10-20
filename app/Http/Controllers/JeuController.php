@@ -134,7 +134,6 @@ class JeuController extends Controller
     public function find(Request $request, JeuManagement $jeuManagement)
     {
         $jeu = $jeuManagement->rechercheMultiCritère($request);
-        //dd($jeu);
         return view('resultatRechercheJeu')->with('jeux', $jeu);;
     }
 }

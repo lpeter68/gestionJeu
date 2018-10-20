@@ -21,5 +21,10 @@ class RoleTableSeeder extends Seeder
         $role_manager->name = 'user';
         $role_manager->description = 'A User';
         $role_manager->save();
+
+        $role_unapproved = new Role();
+        $role_unapproved->name = 'unapproved';
+        $role_unapproved->description = 'Unknown user must be approved to access application';
+        $role_unapproved->save();
     }
 }

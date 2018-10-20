@@ -43,4 +43,17 @@ return [
     'equipe' => 'Equipe',
     'joueurs' => 'joueurs',
     'datePartie' => 'Partie jouée le:',
+    'user' => 'Utilisateurs',
+    'email' => 'Mail',
+    'role' => 'Role',
+    'update' => 'Modifier',
+    'editUser' => 'Editer l\'utilisateur',
+    'cancelButton' => 'Annuler',
+    'saveButton' => 'Sauvegarder',
+    'firstName' => 'Prénom',
+    'lastName' => 'Nom',
+    'surname' => 'Pseudo',
+    'editJoueur' => 'Editer le joueur',
+    'applicationUser' => 'Utilisateur de l\'application',
+    'joueurs' => 'Joueurs'
 ];

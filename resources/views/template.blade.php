@@ -23,6 +23,10 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
+<!-- Datatable -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
 <link rel="stylesheet" href="{{ asset('css/site.css') }}">
 
 <body>
@@ -54,18 +58,82 @@
                     <a class="dropdown-item" href="{{ route('pageRecherche') }}">@lang('menu.recherche')</a>
                 </div>
             </li>
+            @if(Auth::User()->hasRole('admin'))
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @lang('menu.admin')
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('listUser') }}">@lang('menu.userManagement')</a>
+                        <a class="dropdown-item" href="{{ route('listJoueur') }}">@lang('menu.joueurManagement')</a>
+                    </div>
+                </li>
+            @endif
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <ul class="navbar-nav ml-auto">
+            <!-- Authentication Links -->
+            @guest
+                <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+            @else
+                <li class="nav-item">
+                    <span>
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @endguest
+        </ul>
     </div>
 </nav>
 <div class="offset-lg-1 col-lg-10">
     @yield('contenu')
 </div>
+<div class="modal offset-sm-3 col-sm-6" id="editModal" role="dialog">
+    <div class="modal-content">
+        <form id="editModalForm" method="post" enctype="multipart/form-data" autocomplete="off">
+            {{ csrf_field() }}
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="editModal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">@lang('contents.saveButton')</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('contents.cancelButton')</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
     $('.dropdown-toggle').dropdown()
+
+    function showFormModal(modalLoadRoute, modalResultRoute, title) {
+        $('#editModalForm').attr('action',modalResultRoute);
+        $('#editModalTitle').html(title);
+        $.ajax({
+            type: 'get',
+            url: modalLoadRoute,
+            dataType: "html",
+            contentType: "html",
+        }).done(function (response, textStatus, jqXHR) {
+            $(".editModal-body").html(response);
+        });
+        $('#editModal').modal('show');
+    }
 </script>
 </body>
 </html>

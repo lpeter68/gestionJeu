@@ -57,6 +57,14 @@ class AutocompleteController
         return response()->json(AutocompleteController::autocompleteGeneral($request,'jeux','edition'));
     }
 
+    /** Autocomplete with user from table user
+     *
+     * @param Request $request
+     */
+    public function autocompletebyUser(Request $request){
+        return response()->json(AutocompleteController::autocompleteGeneral($request,'users','email'));
+    }
+
     /** Autocomplete with joueur from table jeux
      *
      * @param Request $request

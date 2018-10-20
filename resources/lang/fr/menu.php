@@ -13,4 +13,7 @@ return [
     'jeux'=>'Jeux',
     'toutesLesParties'=>'Toutes les parties',
     'creerPartie' => 'Ajouter une partie',
+    'admin' => 'Administration',
+    'userManagement' => 'Gestion des utilisateurs',
+    'joueurManagement'=> 'Gestion des joueurs',
 ];
