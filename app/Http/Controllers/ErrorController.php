@@ -18,4 +18,9 @@ class ErrorController extends Controller
     {
         return view('error/forbidden');
     }
+
+    public function unapprovedUser()
+    {
+        return view('error/unapprovedUser');
+    }
 }

@@ -14,7 +14,8 @@ class PartieController extends Controller
      */
     public function index()
     {
-        return Partie::all();
+        $parties = Partie::all();
+        return View('parties/index')->with('parties',$parties);
     }
 
     /**
@@ -24,7 +25,7 @@ class PartieController extends Controller
      */
     public function create()
     {
-        return view('partieForms');
+        return view('parties/partieForms');
     }
 
     /**
@@ -38,7 +39,7 @@ class PartieController extends Controller
         //TODO traiter la requete pour tout avoir
         dd($request);
         Partie::create ($request);
-        return view('partieForms');
+        return view('parties/partieForms');
     }
 
     /**

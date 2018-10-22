@@ -10,7 +10,7 @@ class Jeu extends Model
 
     protected $fillable = [
         'nom'
-        , 'edition'
+        ,'edition'
         ,'date_edition'
         ,'remarque'
         ,'nombre_joueur_min'

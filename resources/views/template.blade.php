@@ -48,11 +48,11 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="{{ route('createJeu') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="{{ route('createJeu',0) }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     @lang('menu.jeux')
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('createJeu') }}">@lang('menu.creerJeu')</a>
+                    <a class="dropdown-item" href="{{ route('createJeu',0) }}">@lang('menu.creerJeu')</a>
                     <a class="dropdown-item" href="{{ route('getAllJeu') }}">@lang('menu.toutLesJeux')</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ route('pageRecherche') }}">@lang('menu.recherche')</a>

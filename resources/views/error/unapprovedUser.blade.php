@@ -1,5 +1,5 @@
 @extends('error/errorTemplate')
 
 @section('error')
-    <p>@lang('contents.forbidden')</p>
+    <p>@lang('contents.unapprovedUser')</p>
 @endsection

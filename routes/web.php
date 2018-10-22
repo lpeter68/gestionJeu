@@ -18,11 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', 'HomeController@index')->name('home');
-
     Route::group(['middleware' => 'approved'], function () {
-        Route::get('/jeu', 'JeuController@create')->name('createJeu');
-        Route::post('/jeu', 'JeuController@store')->name('storeJeu');
+        Route::get('/home', 'JeuController@search')->name('home');
+
+        Route::get('/jeu/update/{id}', 'JeuController@edit')->where('id', '[0-9]+')->name('createJeu');
+        Route::post('/jeu/update', 'JeuController@store')->name('storeJeu');
         Route::get('/listeJeu', 'JeuController@index')->name('getAllJeu');
         Route::get('/jeu/{id}', 'JeuController@edit')->where('id', '[0-9]+')->name('getJeu');
         Route::get('/imageJeu/{id}', 'JeuController@getImagePath')->where('id', '[0-9]+')->name('getJeuImage');
@@ -51,15 +51,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['middleware' => 'admin'], function () {
             Route::prefix('admin')->group(function () {
                 Route::get('/user', 'Admin\UserController@index')->name('listUser');
-                Route::get('/user/update/{id}', 'Admin\UserController@modal')->name('modalUser');
+                Route::get('/user/update/{id}', 'Admin\UserController@modal')->where('id', '[0-9]+')->name('modalUser');
                 Route::post('/user/update', 'Admin\UserController@update')->name('updateUser');
 
                 Route::get('/joueur', 'Admin\JoueurController@index')->name('listJoueur');
-                Route::get('/joueur/update/{id}', 'Admin\JoueurController@modal')->name('modalJoueur');
+                Route::get('/joueur/update/{id}', 'Admin\JoueurController@modal')->where('id', '[0-9]+')->name('modalJoueur');
                 Route::post('/joueur/update', 'Admin\JoueurController@update')->name('updateJoueur');
             });
         });
     });
+    Route::get('/unapprovedUser', 'ErrorController@unapprovedUser')->name('unapprovedUser');
 });
 
 Route::get('/forbidden', 'ErrorController@forbidden')->name('forbidden');

@@ -21,8 +21,9 @@
                 <td>{{$joueur->surnom}}</td>
                 <td>
                     @if($joueur->applicationUser != null )
-                        {{$joueur->applicationUser->email}}</td>
+                        {{$joueur->applicationUser->email}}
                     @endif
+                </td>
                 <td>
                     <input type="button" class="btn btn-primary modifyUser" onclick="update('{{route("modalJoueur",$joueur->id)}}')" value="@lang('contents.update')">
                 </td>
@@ -30,6 +31,7 @@
         @endforeach
         </tbody>
     </table>
+    <a onclick="update('{{route("modalJoueur",0)}}')"><i class="fa fa-plus-circle" style="font-size:36px;color:     #007bff"></i></a>
 
     <script>
         $(document).ready(function() {

@@ -41,8 +41,8 @@ return [
     'nom_joueur' => 'Nom du joueur',
     'score' => 'Score',
     'equipe' => 'Equipe',
-    'joueurs' => 'joueurs',
     'datePartie' => 'Partie jouée le:',
+    'duree' => 'Durée',
     'user' => 'Utilisateurs',
     'email' => 'Mail',
     'role' => 'Role',
@@ -55,5 +55,10 @@ return [
     'surname' => 'Pseudo',
     'editJoueur' => 'Editer le joueur',
     'applicationUser' => 'Utilisateur de l\'application',
-    'joueurs' => 'Joueurs'
+    'joueurs' => 'Joueurs',
+    'jeux' => 'Jeux',
+    'parties' => 'Parties',
+    'unapprovedUser' => 'Désolé mais l\'administrateur n\'a pas validé votre profil',
+    'forbidden' => 'Accès non autorisé, va voir ailleurs si j\'y suis',
+    'somethingWrong' => 'Désolé mais visiblement ca ne marche pas'
 ];

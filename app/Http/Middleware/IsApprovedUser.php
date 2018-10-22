@@ -18,6 +18,6 @@ class IsApprovedUser
         if($request->user()->hasAnyRole(['user','admin'])){
             return $next($request);
         }
-        return redirect(route('forbidden'));
+        return redirect(route('unapprovedUser'));
     }
 }
