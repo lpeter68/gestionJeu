@@ -11,8 +11,13 @@ function remplirMenuDeroulant(jquerySelector, route, selectedValue = null) {
             var response= JSON.parse(response)
             var optionList ;
             for (var i=0;i<response.length;i++) {
-                optionList += "<option value="+response[i].id+">"+response[i].label+ "</option>";
-            }
+                var selected = "";
+                if(selectedValue!=null && i==selectedValue){
+                    selected = " selected";
+                }
+                console.log(selectedValue + " " + i +" "+ selected);
+                optionList += "<option value="+response[i].id + selected +">"+response[i].label+ "</option>";
+            }+
             $(jquerySelector).html(optionList);
             $(jquerySelector).val(selectedValue);
         })

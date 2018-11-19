@@ -92,7 +92,7 @@ class PhotoManagement
 
         imagecopymerge($final_image,$smaller_image_with_proportions,$dst_x,$dst_y,$src_x,$src_y,$src_w,$src_h,$pct);*/
 
-        //imagejpeg($src_img,$destination_file.'0',$jpeg_quality);
+        imagejpeg($src_img,$destination_file.'original',$jpeg_quality);
         imagejpeg($smaller_image_with_proportions,$destination_file,$jpeg_quality);
         //imagejpeg($final_image,$destination_file.'2',$jpeg_quality);
 

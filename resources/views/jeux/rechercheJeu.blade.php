@@ -4,7 +4,7 @@
     <script type="text/javascript" src="{{ URL::asset('js/remplirmenuDeroulant.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/autocomplete.js') }}"></script>
 
-    <form action="{{ route('rechercheJeu') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+    <form id="form" action="{{ route('rechercheJeu') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
     {{ csrf_field() }}
         <div class="form-group">
             <div class=" row col-sm-5">
@@ -48,85 +48,7 @@
                     {!! $errors->first('age', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
 
-                <div id="categorieJeu">
-                    <div class="col-sm-5">
-                        <label for="hasard">@lang('contents.hasard')</label>
-                        <input type="checkbox" class="form-check-input" name="hasard" id="hasard">
-                        {!! $errors->first('hasard', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-
-                    <div class="col-sm-5">
-                        <label for="strategie">@lang('contents.strategie')</label>
-                        <input type="checkbox" class="form-check-input" name="strategie" id="strategie">
-                        {!! $errors->first('strategie', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-
-                    <div class="col-sm-5">
-                        <label for="des">@lang('contents.des')</label>
-                        <input type="checkbox" class="form-check-input" name="des" id="des">
-                        {!! $errors->first('des', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-
-                    <div class="col-sm-5">
-                        <label for="cartes">@lang('contents.cartes')</label>
-                        <input type="checkbox" class="form-check-input" name="cartes" id="cartes">
-                        {!! $errors->first('cartes', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-
-                    <div class="col-sm-5">
-                        <label for="adresse">@lang('contents.adresse')</label>
-                        <input type="checkbox" class="form-check-input" name="adresse" id="adresse">
-                        {!! $errors->first('adresse', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-
-                    <div class="col-sm-5">
-                        <label for="questions">@lang('contents.questions')</label>
-                        <input type="checkbox" class="form-check-input" name="questions" id="questions">
-                        {!! $errors->first('questions', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-
-                    <div class="col-sm-5">
-                        <label for="lettres">@lang('contents.lettres')</label>
-                        <input type="checkbox" class="form-check-input" name="lettres" id="lettres">
-                        {!! $errors->first('lettres', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-
-                    <div class="col-sm-5">
-                        <label for="chiffres">@lang('contents.chiffres')</label>
-                        <input type="checkbox" class="form-check-input" name="chiffres" id="chiffres">
-                        {!! $errors->first('chiffres', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-
-                    <div class="col-sm-5">
-                        <label for="equipes">@lang('contents.equipes')</label>
-                        <input type="checkbox" class="form-check-input" name="equipes" id="equipes">
-                        {!! $errors->first('equipes', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-
-                    <div class="col-sm-5">
-                        <label for="cooperation">@lang('contents.cooperation')</label>
-                        <input type="checkbox" class="form-check-input" name="cooperation" id="cooperation">
-                        {!! $errors->first('cooperation', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-
-                    <div class="col-sm-5">
-                        <label for="memoire">@lang('contents.memoire')</label>
-                        <input type="checkbox" class="form-check-input" name="memoire" id="memoire">
-                        {!! $errors->first('memoire', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-
-                    <div class="col-sm-5">
-                        <label for="argent">@lang('contents.argent')</label>
-                        <input type="checkbox" class="form-check-input" name="argent" id="argent">
-                        {!! $errors->first('argent', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-
-                    <div class="col-sm-5">
-                        <label for="point_victoire">@lang('contents.point_victoire')</label>
-                        <input type="checkbox" class="form-check-input" name="point_victoire" id="point_victoire">
-                        {!! $errors->first('point_victoire', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
-                </div>
+                @include('common/jeuTypes')
 
                 <div id="editionJeu">
                     <div class="row col-sm-5">
@@ -158,7 +80,7 @@
             </div>
 
             <div class="col-sm-5">
-                <input type="submit" class="btn btn-primary top-margin" value="Rechercher !">
+                <input type="submit" class="submit btn btn-primary top-margin" value="Rechercher !">
             </div>
         </div>
     </form>
@@ -178,6 +100,9 @@
             }
         });
 
+        $(".submit").click(function() {
+            convertTypeData('#form');
+        })
     </script>
 
 @endsection

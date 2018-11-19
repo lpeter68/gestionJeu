@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
-
 class JeuController extends Controller
 {
     /**
@@ -52,6 +51,36 @@ class JeuController extends Controller
      */
     public function store(JeuRequest $request, PhotoManagement $photoManagement)
     {
+        $validatedData = $request->validate([
+            'nom'  => 'required|alpha_num_spaces|max:255',
+            'edition' => 'alpha_num_spaces|nullable',
+            'date_edition' => 'alpha_num_spaces|nullable',
+            'remarque' => 'alpha_num_spaces|nullable',
+            'nombre_joueur_min' => 'numeric|nullable',
+            'nombre_joueur_max' => 'numeric|nullable',
+            'age' => 'integer|nullable',
+            'temps_jeu' => 'integer|nullable',
+            'hasard' => 'boolean',
+            'strategie' => 'boolean',
+            'des' => 'boolean',
+            'cartes' => 'boolean',
+            'adresse' => 'boolean',
+            'questions' => 'boolean',
+            'lettres' => 'boolean',
+            'chiffres' => 'boolean',
+            'equipes' => 'boolean',
+            'cooperation' => 'boolean',
+            'memoire' => 'boolean',
+            'argent' => 'boolean',
+            'point_victoire' => 'boolean',
+            'interet' => 'required',
+            'etat' => 'required',
+            'regle' => 'required',
+            'mise_en_place' => 'numeric|nullable',
+            'pieces_manquantes' => 'alpha_num_spaces|nullable',
+            'divers' => 'alpha_num_spaces|nullable',
+            'photo' => 'file|nullable',
+        ]);
         $requestData = $request->all();
         if($requestData['id'] != null && $requestData['id']!=0) {
             $jeu = Jeu::Find($requestData['id']);
@@ -64,7 +93,8 @@ class JeuController extends Controller
         $jeu->fill($requestData);
         //dd($jeu);
         $jeu->save();
-        return view('jeux/jeuForms')->with('jeu',$jeu);
+        dd($jeu);
+        return JeuController::edit($jeu->id);
     }
 
     /**

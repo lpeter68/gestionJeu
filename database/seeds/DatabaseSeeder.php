@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $labelInteret = ['Nul','Moyen','Bien','Très-bien','Excellent'];
+        $labelInteret = ['Non joué','Nul','Moyen','Bien','Très-bien','Excellent'];
         foreach ($labelInteret as $label){
             $this->insertRessourceTable("interet", $label);
         }
@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             $this-> insertRessourceTable('etat', $label);
         }
 
-        $labelRegle = ['Facile','Moyenne','Longue'];
+        $labelRegle = ['Non joué','Facile','Moyenne','Longue'];
         foreach ($labelRegle as $label){
             $this->insertRessourceTable('regle', $label);
         }

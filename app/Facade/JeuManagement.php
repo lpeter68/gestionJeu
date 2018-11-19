@@ -45,67 +45,67 @@ class JeuManagement
             Log::Debug("Critère de recherche : age ".$request->age);
             $sql->where('age', '>=', $request->age);
         }
-        if($request->hasard== "on") {
+        if($request->hasard) {
             Log::Debug("Critère de recherche : hasard ".$request->hasard);
-            $sql->where('hasard', '>=', $request->hasard);
+            $sql->where('hasard', '=', $request->hasard);
         }
 
-        if($request->strategie== "on") {
+        if($request->strategie) {
             Log::Debug("Critère de recherche : strategie ".$request->strategie);
             $sql->where('strategie', '=', $request->strategie);
         }
 
-        if($request->des== "on") {
+        if($request->des) {
             Log::Debug("Critère de recherche : des ".$request->des);
             $sql->where('des', '=', $request->des);
         }
 
-        if($request->cartes== "on") {
+        if($request->cartes) {
             Log::Debug("Critère de recherche : cartes ".$request->cartes);
             $sql->where('cartes', '=', $request->cartes);
         }
 
-        if($request->adresse== "on") {
+        if($request->adresse) {
             Log::Debug("Critère de recherche : adresse ".$request->adresse);
             $sql->where('adresse', '=', $request->adresse);
         }
 
-        if($request->questions== "on") {
+        if($request->questions) {
             Log::Debug("Critère de recherche : questions ".$request->questions);
             $sql->where('questions', '=', $request->questions);
         }
 
-        if($request->lettres== "on") {
+        if($request->lettres) {
             Log::Debug("Critère de recherche : lettres ".$request->lettres);
             $sql->where('lettres', '=', $request->lettres);
         }
 
-        if($request->chiffres== "on") {
+        if($request->chiffres) {
             Log::Debug("Critère de recherche : chiffres ".$request->chiffres);
             $sql->where('chiffres', '=', $request->chiffres);
         }
 
-        if($request->equipes== "on") {
+        if($request->equipes) {
             Log::Debug("Critère de recherche : equipes ".$request->equipes);
             $sql->where('equipes', '=', $request->equipes);
         }
 
-        if($request->cooperation== "on") {
+        if($request->cooperation) {
             Log::Debug("Critère de recherche : cooperation ".$request->cooperation);
             $sql->where('cooperation', '=', $request->cooperation);
         }
 
-        if($request->memoire== "on") {
+        if($request->memoire) {
             Log::Debug("Critère de recherche : memoire ".$request->memoire);
             $sql->where('memoire', '=', $request->memoire);
         }
 
-        if($request->argent== "on") {
+        if($request->argent) {
             Log::Debug("Critère de recherche : argent ".$request->argent);
             $sql->where('argent', '=', $request->argent);
         }
 
-        if($request->point_victoire== "on") {
+        if($request->point_victoire) {
             Log::Debug("Critère de recherche : point_victoire ".$request->point_victoire);
             $sql->where('point_victoire', '=', $request->point_victoire);
         }
@@ -125,7 +125,7 @@ class JeuManagement
             $sql->where('etat', '>=', $request->etat);
         }
 
-        if($request->pieces_manquantes == "on") {
+        if($request->pieces_manquantes ) {
             Log::Debug("Critère de recherche : pieces_manquantes ".$request->pieces_manquantes);
             $sql->whereNotNull('pieces_manquantes');
         }
