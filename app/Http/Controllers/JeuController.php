@@ -120,7 +120,7 @@ class JeuController extends Controller
         if($jeu->photo != null) {
             return $photoManagement->load(Jeu::Find($id)->photo);
         }else{
-            return "";
+            return asset('not-found.png');
         }
     }
 

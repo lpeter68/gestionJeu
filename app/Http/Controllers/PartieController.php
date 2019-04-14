@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use\App\Model\Partie;
+use App\Model\PartiesJoueurs;
 use Illuminate\Http\Request;
 
 class PartieController extends Controller
@@ -36,8 +37,32 @@ class PartieController extends Controller
      */
     public function store(Request $request)
     {
+        /*$validatedData = $request->validate([
+            TODO valider
+        ]);*/
         //TODO traiter la requete pour tout avoir
-        dd($request);
+        $requestData = json_decode($request->all()['jsonData']);
+
+        $partie = new  Partie();
+        $partie->jeu = $requestData->jeu;
+        $partie->date = $requestData->date;
+        $equipes = $requestData->equipes;
+        $nbJoueur = 0;
+        $partie->nbEquipe = count($equipes);
+        foreach ($equipes as $equipe){
+            $equipenum = uniqid ();
+            $nbJoueur += count($equipe->joueurs);
+            foreach ($equipe->joueurs as $joueur){
+                $partie_joueur = new PartiesJoueurs();
+                $partie_joueur->joueur = $joueur;
+                $partie_joueur->equipe = $equipenum;
+                $partie_joueur->classement = array_search($equipe,$equipes)+1;
+                $partie_joueur->nbPoint = $equipe->score;
+                dd($partie_joueur);
+            }
+        }
+        $partie->nbJoueur = $nbJoueur;
+        dd($partie);
         Partie::create ($request);
         return view('parties/partieForms');
     }

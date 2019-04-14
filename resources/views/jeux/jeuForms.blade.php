@@ -109,7 +109,7 @@
                             <div class="image">
                                 <!--TODO récupérer le fichier-->
                                 <label for="photo" class="align-middle">
-                                    <img src={{ asset('uploads/test.jpg') }} id="imgPhoto" class="img" />
+                                    <img src={{ asset('not-found.png') }} id="imgPhoto" class="img" value={{old('imgPhoto')?:$jeu->imgPhoto}}/>
                                 </label>
                                 <input type="file" class="form-control {{ $errors->has('photo') ? 'is-invalid' : '' }}" name="photo" id="photo" style="display: none">
                                 {!! $errors->first('photo', '<div class="invalid-feedback">:message</div>') !!}
@@ -144,7 +144,7 @@
             readURL(this);
             $('.img').each(function(){ if($(this).outerWidth(true) <= $(this).outerHeight(true)) {
                 //not as wide as tall
-                alert($('#divPhoto').width);
+                //alert($('#divPhoto').width);
                 $(this).css({
                     "min-width": "",
                     "max-width": "",
